@@ -15,7 +15,7 @@ namespace CrowdFundingBLL.Interfaces
 
         User Register(UserRegister userRegister);
 
-        bool Update(int id);
+        bool Update(int id,UserRegister newUser);
         // - Delete
         bool Delete(int id);
 

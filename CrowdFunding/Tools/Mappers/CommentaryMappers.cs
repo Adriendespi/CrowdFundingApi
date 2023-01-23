@@ -1,4 +1,5 @@
 ﻿using CrowdFundingBLL.Models;
+using CrowdFundingBLL.Tools.DTO.CommentaryDTO;
 using CrowdFundingDAL.Models;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,13 @@ namespace CrowdFundingBLL.Tools.Mappers
                 Project = commentary.Project.ToBll(),
                 User = commentary.User.ToBLL(),
 
+            };
+        }
+        public static CommentaryBLL ToEntity(this CommentaryCreate commentary)
+        {
+            return new CommentaryBLL
+            {
+                
             };
         }
     }

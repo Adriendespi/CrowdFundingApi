@@ -13,7 +13,7 @@ namespace CrowdFundingBLL.Interfaces
     {
         void CreateCommentary(CommentaryCreate comment);
 
-        bool UpdateCommentary(CommentaryBLL comment);
+        bool UpdateCommentary(int id,CommentaryCreate comment);
 
         bool DeleteCommentary(int id);
 

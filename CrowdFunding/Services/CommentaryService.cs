@@ -3,6 +3,7 @@ using CrowdFundingBLL.Models;
 using CrowdFundingBLL.Tools.DTO.CommentaryDTO;
 using CrowdFundingBLL.Tools.Mappers;
 using CrowdFundingDAL.Interfaces;
+using CrowdFundingDAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,14 @@ namespace CrowdFundingBLL.Services
             _projectRepository = projectRepository;
         }
 
-        public void CreateCommentary(CommentaryCreate newcomment)
+        public void CreateCommentary(CommentaryCreate newComment)
         {
             try
             {
                 CommentaryBLL comment = new CommentaryBLL();
-                comment.Text = newcomment.Text;
-                comment.Project = _projectRepository.GetById(newcomment.ProjectId).ToBll();
-                comment.User = _userRepository.GetById(newcomment.UserID).ToBLL();
+                comment.Text = newComment.Text;
+                comment.Project = _projectRepository.GetById(newComment.ProjectId).ToBll();
+                comment.User = _userRepository.GetById(newComment.UserID).ToBLL();
                 _commentRepo.Insert(comment.ToDal());
             }
             catch
@@ -70,8 +71,14 @@ namespace CrowdFundingBLL.Services
             }
         }
 
-        public bool UpdateCommentary(CommentaryBLL comment)
+        public bool UpdateCommentary(int id,CommentaryCreate newComment)
         {
+            CommentaryBLL comment = new CommentaryBLL();
+            comment.ID = id;
+            comment.Text = newComment.Text;
+            comment.Project = _projectRepository.GetById(newComment.ProjectId).ToBll();
+            comment.User = _userRepository.GetById(newComment.UserID).ToBLL();
+
             return _commentRepo.Update(comment.ToDal());
         }
     }

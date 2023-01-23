@@ -12,7 +12,7 @@ namespace CrowdFundingBLL.Interfaces
     {
         void CreateProject(ProjectCreate projectCreate);
 
-        bool UpdateProject(ProjectBLL newProject);
+        bool UpdateProject(int id,ProjectCreate newProject);
 
         bool DeleteProject(int id);
 

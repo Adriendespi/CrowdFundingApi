@@ -73,7 +73,7 @@ namespace CrowdFunding.Api.Controllers
         }
         [HttpDelete("{id}")]
         [Authorize("Auth")]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteUser(int id)
         {
             try
             {
@@ -85,13 +85,13 @@ namespace CrowdFunding.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPatch]
+        [HttpPatch("{id}")]
         [Authorize("Auth")]
-        public IActionResult Update(int id)
+        public IActionResult UpdateUser(int id,UserRegister user)
         {
             try
             {
-                _userService.Update(id);
+                _userService.Update(id,user);
                 return Ok();
             }
             catch (Exception ex)

@@ -1,7 +1,7 @@
 ﻿using CrowdFundingBLL.Interfaces;
 using CrowdFundingBLL.Services;
+using CrowdFundingBLL.Tools.DTO.CommentaryDTO;
 using CrowdFundingBLL.Tools.DTO.ProjectDTO;
-using CrowdFundingBLL.Tools.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,52 +9,49 @@ namespace CrowdFunding.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : Controller
+    public class CommentaryController : Controller
     {
-       private IProjectService _projectService;
-
-        public ProjectController(IProjectService projectService)
+        private ICommentaryService _commentaryService;
+        public CommentaryController(ICommentaryService commentaryService)
         {
-            _projectService= projectService;
+            _commentaryService = commentaryService;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetProject(int id)
-        {
+        public IActionResult GetComment(int id) 
+        { 
             try
             {
-                return Ok(_projectService.GetProject(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            
-           
-        }
-        [HttpGet("GetAll")]
-        public IActionResult GetAllProject()
-        {
-            try
-            {
-                return Ok(_projectService.GetAllProjects());
+                return Ok(_commentaryService.GetCommentary(id));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        
+        [HttpGet("GetAllfrom/{id}")]
+        public IActionResult GetAllCommentFromProject(int id)
+        {
+            try
+            {
+                return Ok(_commentaryService.GetAllCommentFromProjects(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize("Auth")]
-        public IActionResult InsertProject(ProjectCreate project)
+        public IActionResult InsertComment(CommentaryCreate commentary)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                _projectService.CreateProject(project);
+                _commentaryService.CreateCommentary(commentary);
                 return Ok();
             }
             catch (Exception ex)
@@ -64,12 +61,12 @@ namespace CrowdFunding.Api.Controllers
         }
         [HttpDelete("{id}")]
         [Authorize("Auth")]
-        public IActionResult DeleteProject(int id)
+        public IActionResult DeleteComment(int id)
         {
             try
             {
-                _projectService.DeleteProject(id);
-                return Ok();
+               ;
+                return Ok(_commentaryService.DeleteCommentary(id));
             }
             catch (Exception ex)
             {
@@ -78,20 +75,17 @@ namespace CrowdFunding.Api.Controllers
         }
         [HttpPatch("{id}")]
         [Authorize("Auth")]
-        public IActionResult UpdateProject(int id, ProjectCreate project)
+        public IActionResult UpdateComment(int id,CommentaryCreate comment )
         {
             try
             {
-                _projectService.UpdateProject(id,project);
-                return Ok();
+               
+                return Ok(_commentaryService.UpdateCommentary(id,comment));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-
-
     }
 }

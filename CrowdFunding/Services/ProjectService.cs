@@ -62,9 +62,11 @@ namespace CrowdFundingBLL.Services
             }
         }
 
-        public bool UpdateProject(ProjectBLL project)
+        public bool UpdateProject(int id,ProjectCreate newProject)
         {
          
+            ProjectBLL project= newProject.ToEntity();
+            project.Id=id;
             return _repo.Update(project.ToDal());
         
         }

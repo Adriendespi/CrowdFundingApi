@@ -82,9 +82,11 @@ namespace CrowdFundingBLL.Services
            return _Repo.Delete(_Repo.GetById(id));
             
         }
-        public bool Update(int id)
+        public bool Update(int id,UserRegister newUser)
         {
-            return _Repo.Update(_Repo.GetById(id));
+            UserBLL user= newUser.ToEntity();
+            user.Id= id;
+            return _Repo.Update(user.ToDAL());
 
         }
 
