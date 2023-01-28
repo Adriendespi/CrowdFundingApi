@@ -15,6 +15,7 @@ namespace CrowdFundingDAL.Repositories
 
         public CommentaryRepository(DataContext context):base(context)
         {
+            _Context = context;
         }
 
         public IEnumerable<Commentary> GetAllCommentFromProject(int projectid)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CrowdFundingDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class DbInit : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,7 +37,7 @@ namespace CrowdFundingDAL.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     img = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 11, 25, 11, 36, 46, 434, DateTimeKind.Local).AddTicks(9712)),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 1, 28, 15, 37, 41, 301, DateTimeKind.Local).AddTicks(3531)),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SumGoal = table.Column<int>(type: "int", nullable: false),
                     Sum = table.Column<int>(type: "int", nullable: false),
@@ -51,7 +51,7 @@ namespace CrowdFundingDAL.Migrations
                         column: x => x.ProjectManagerId,
                         principalTable: "users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,32 +81,6 @@ namespace CrowdFundingDAL.Migrations
                         onDelete: ReferentialAction.NoAction);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserProjectMTM",
-                columns: table => new
-                {
-                    PId = table.Column<int>(type: "int", nullable: false),
-                    UId = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserProjectMTM", x => new { x.UId, x.PId });
-                    table.ForeignKey(
-                        name: "FK_UserProjectMTM_projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_UserProjectMTM_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_comments_ProjectId",
                 table: "comments",
@@ -121,16 +95,6 @@ namespace CrowdFundingDAL.Migrations
                 name: "IX_projects_ProjectManagerId",
                 table: "projects",
                 column: "ProjectManagerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProjectMTM_ProjectId",
-                table: "UserProjectMTM",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProjectMTM_UserId",
-                table: "UserProjectMTM",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -138,9 +102,6 @@ namespace CrowdFundingDAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "comments");
-
-            migrationBuilder.DropTable(
-                name: "UserProjectMTM");
 
             migrationBuilder.DropTable(
                 name: "projects");

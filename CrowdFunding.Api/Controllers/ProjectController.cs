@@ -46,7 +46,7 @@ namespace CrowdFunding.Api.Controllers
         }
         
         [HttpPost]
-        [Authorize("Auth")]
+       
         public IActionResult InsertProject(ProjectCreate project)
         {
             if (!ModelState.IsValid)

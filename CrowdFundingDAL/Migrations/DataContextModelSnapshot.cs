@@ -17,7 +17,7 @@ namespace CrowdFundingDAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -76,7 +76,7 @@ namespace CrowdFundingDAL.Migrations
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 11, 25, 11, 36, 46, 434, DateTimeKind.Local).AddTicks(9712));
+                        .HasDefaultValue(new DateTime(2023, 1, 28, 15, 37, 41, 301, DateTimeKind.Local).AddTicks(3531));
 
                     b.Property<int>("Sum")
                         .HasColumnType("int");
@@ -126,29 +126,6 @@ namespace CrowdFundingDAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CrowdFundingDAL.Models.UserProjectMTM", b =>
-                {
-                    b.Property<int>("UId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UId", "PId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserProjectMTM");
-                });
-
             modelBuilder.Entity("CrowdFundingDAL.Models.Commentary", b =>
                 {
                     b.HasOne("CrowdFundingDAL.Models.Project", "Project")
@@ -171,36 +148,12 @@ namespace CrowdFundingDAL.Migrations
             modelBuilder.Entity("CrowdFundingDAL.Models.Project", b =>
                 {
                     b.HasOne("CrowdFundingDAL.Models.User", "ProjectManager")
-                        .WithMany()
+                        .WithMany("UsersProjects")
                         .HasForeignKey("ProjectManagerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProjectManager");
-                });
-
-            modelBuilder.Entity("CrowdFundingDAL.Models.UserProjectMTM", b =>
-                {
-                    b.HasOne("CrowdFundingDAL.Models.Project", "Project")
-                        .WithMany("Donator")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CrowdFundingDAL.Models.User", "User")
-                        .WithMany("UsersProjects")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CrowdFundingDAL.Models.Project", b =>
-                {
-                    b.Navigation("Donator");
                 });
 
             modelBuilder.Entity("CrowdFundingDAL.Models.User", b =>

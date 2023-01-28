@@ -16,6 +16,7 @@ namespace CrowdFundingDAL.GestionEntity.Config
             builder.Property(x => x.Pwd).IsRequired();    
             builder.Property(x=> x.IsAdmin).IsRequired();
             builder.HasCheckConstraint("CK_MAIL", "Mail like '__%@__%._%'");
+            builder.HasMany(p => p.UsersProjects).WithOne(u => u.ProjectManager);
 
           }
      }

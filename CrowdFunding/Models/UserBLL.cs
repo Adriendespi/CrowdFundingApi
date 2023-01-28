@@ -21,7 +21,7 @@ namespace CrowdFundingBLL.Models
         
         public bool IsAdmin { get; set; }
 
-
-        public ICollection<UserProjectMTM> UsersProjects { get; set; } = new List<UserProjectMTM>();
+       
+        public ICollection<Project> UsersProjects { get; set; } = new List<Project>();
     }
 }

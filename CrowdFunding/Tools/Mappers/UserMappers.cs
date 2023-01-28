@@ -18,7 +18,8 @@ namespace CrowdFundingBLL.Tools.Mappers
             {
                 Pseudo = user.Pseudo,
                 Pwd = user.Pwd,
-                Mail= user.Mail,
+                Mail = user.Mail,
+              
                 
                 
             };
@@ -45,7 +46,7 @@ namespace CrowdFundingBLL.Tools.Mappers
                 Mail = user.Mail,
                 Pwd = user.Pwd,
                 IsAdmin = user.IsAdmin,
-                UsersProjects = user.UsersProjects,
+                UsersProjects = user.UsersProjects
 
                 
 

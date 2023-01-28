@@ -23,7 +23,7 @@ namespace CrowdFundingBLL.Services
         }
         public User Login(UserLogin userLogin)
         {
-            string hash = _Repo.GetHashByName(userLogin.Pseudo);
+            string hash = _Repo.GetHashByName(userLogin.Identifiant);
 
             if (string.IsNullOrWhiteSpace(hash))
             {
@@ -33,7 +33,7 @@ namespace CrowdFundingBLL.Services
            
             if (Argon2.Verify(hash, userLogin.Pwd))
             {
-                return _Repo.GetByUsername(userLogin.Pseudo);
+                return _Repo.GetByUsername(userLogin.Identifiant);
             }
             else
             {
@@ -43,11 +43,12 @@ namespace CrowdFundingBLL.Services
 
         public User Register(UserRegister userRegister)
         {
-            if (!_Repo.CheckExiste(userRegister.Pseudo, userRegister.Mail))
+            if (_Repo.CheckExiste(userRegister.Pseudo, userRegister.Mail))
                 throw new Exception("Pseudo ou Email déjà utilisé");
 
             userRegister.Pwd=Argon2.Hash(userRegister.Pwd);
             User user = userRegister.ToEntity().ToDAL(); 
+            
 
             _Repo.Insert(user);
             return user;

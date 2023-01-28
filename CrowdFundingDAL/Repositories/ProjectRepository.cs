@@ -15,13 +15,20 @@ namespace CrowdFundingDAL.Repositories
 
         public ProjectRepository(DataContext context):base(context)
         {
-
+            _Context=context;
         }
         public bool CheckExiste(string name)
         {
             //verifie si les donner existe
-            return !(_Context.projects.Any(m => m.Name == name ));
+            return (_Context.projects.Any(m => m.Name == name ));
 
+        }
+        public override Project Insert(Project project)
+        {
+            
+            _Context.Add(project);
+            _Context.SaveChanges();
+            return (project);
         }
     }
 }

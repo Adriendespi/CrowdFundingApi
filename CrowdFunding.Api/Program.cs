@@ -1,9 +1,11 @@
 using CrowdFunding.Api.Infrastructure;
 using CrowdFundingBLL.Interfaces;
 using CrowdFundingBLL.Services;
+using CrowdFundingDAL.GestionEntity.context;
 using CrowdFundingDAL.Interfaces;
 using CrowdFundingDAL.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -16,7 +18,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddDbContext<DataContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+
 builder.Services.AddScoped<ICommentaryRepository, CommentaryRepository>();
+
+
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 

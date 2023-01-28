@@ -21,7 +21,7 @@ namespace CrowdFunding.Api.Controllers
             _tokkenManager= tokenManager;
             _userService= userService;
         }
-        [HttpPost("/register")]
+        [HttpPost("/api/User/register")]
         public ActionResult Register(UserRegister user) 
         {
             if(!ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace CrowdFunding.Api.Controllers
             
 
         }
-        [HttpPost("/login")]
+        [HttpPost("/api/User/login")]
         public IActionResult Login(UserLogin user)
         {
             UserApi currentuser = _userService.Login(user).ToBLL().ToApi();
@@ -59,12 +59,12 @@ namespace CrowdFunding.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
+        [HttpGet("/api/User/GetAll")]
         public IActionResult GetAllUser()
         {
             try
             {
-                return Ok(GetAllUser());
+                return Ok(_userService.GetAllUsers());
             }
             catch (Exception ex)
             {
@@ -107,5 +107,5 @@ namespace CrowdFunding.Api.Controllers
 
         
        
-    }
 }
+

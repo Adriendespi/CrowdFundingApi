@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace CrowdFundingDAL.Models
 {
-    public class UserProjectMTM
-    {
-        public int PId { get; set; }
-        public Project Project { get; set; }
+    // To Do avec systemr de donnation
+    //public class UserProjectMTM
+    //{
+    //    public int PId { get; set; }
+    //    public Project Project { get; set; }
 
-        public int UId { get; set; }
-        public User User { get; set; }
-    }
+    //    public int UId { get; set; }
+    //    public User User { get; set; }
+
+
+    //}
 }

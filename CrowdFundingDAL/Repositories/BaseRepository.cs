@@ -1,5 +1,6 @@
 ﻿using CrowdFundingDAL.GestionEntity.context;
 using CrowdFundingDAL.Interfaces;
+using CrowdFundingDAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace CrowdFundingDAL.Repositories
             _Context = context;
 
         }
+        TEntity entity1_Entity1;
         public bool Delete(TEntity entity)
         {
             _Context.Remove(entity);
@@ -32,10 +34,13 @@ namespace CrowdFundingDAL.Repositories
 
         public TEntity? GetById(params object[] Id)
         {
-            return _Context.Set<TEntity>().Find(Id);
+          
+             entity1_Entity1 = _Context.Set<TEntity>().Find(Id);
+            return entity1_Entity1;
+            
         }
 
-        public TEntity Insert(TEntity entity)
+        public virtual TEntity Insert(TEntity entity)
         {
             _Context.Add(entity);
             _Context.SaveChanges();
@@ -44,6 +49,7 @@ namespace CrowdFundingDAL.Repositories
 
         public bool Update(TEntity entity)
         {
+
             _Context.Update(entity);
             return _Context.SaveChanges() > 0;
         }

@@ -11,11 +11,13 @@ namespace CrowdFundingDAL.GestionEntity.context
         public DbSet<User> users { get; set; }
         public DbSet<Project> projects { get; set; }
         public DbSet<Commentary> comments { get; set; }
-        
+
+        public DataContext(DbContextOptions options) : base(options)
+        {  }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-MDN4PLH;Initial Catalog=CrowdFunding;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=False;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-OAB0UHO;Database=CrowdFunding;Trusted_Connection=True;TrustServerCertificate=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +25,8 @@ namespace CrowdFundingDAL.GestionEntity.context
             modelBuilder.ApplyConfiguration(new ProjectConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new CommentConfig());
-            modelBuilder.Entity<UserProjectMTM>().HasKey(x => new { x.UId, x.PId });
+
+           
 
         }
     }

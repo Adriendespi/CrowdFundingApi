@@ -23,8 +23,8 @@ namespace CrowdFundingDAL.Models
         public int Sum { get; set; }
         [Required]
         public User ProjectManager { get; set; }
+
         
-        public  ICollection<UserProjectMTM> Donator { get; set; } = new List<UserProjectMTM>();
 
 
     }

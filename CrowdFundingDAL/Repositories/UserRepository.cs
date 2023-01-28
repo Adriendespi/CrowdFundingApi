@@ -14,7 +14,9 @@ namespace CrowdFundingDAL.Repositories
         public DataContext _Context;
 
         public UserRepository(DataContext context) : base(context) 
-        { }
+        {
+            _Context = context;
+        }
 
         public User? GetByUsername(string username)
         {
@@ -31,7 +33,7 @@ namespace CrowdFundingDAL.Repositories
         public bool CheckExiste(string pseudo, string mail)
         {
             //verifie si les donner existe
-            return !(_Context.users.Any(m => m.Pseudo == pseudo || m.Mail == mail));
+            return (_Context.users.Any(m => m.Pseudo == pseudo || m.Mail == mail));
 
         }
 

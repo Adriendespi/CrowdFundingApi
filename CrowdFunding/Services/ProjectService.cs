@@ -4,6 +4,7 @@ using CrowdFundingBLL.Tools.DTO.ProjectDTO;
 using CrowdFundingBLL.Tools.Mappers;
 using CrowdFundingDAL.Interfaces;
 using CrowdFundingDAL.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,15 @@ namespace CrowdFundingBLL.Services
 
         public void CreateProject(ProjectCreate projectCreate)
         {
-            if (projectCreate == null || _repo.CheckExiste(projectCreate.Name)) ;
+            if (projectCreate == null || _repo.CheckExiste(projectCreate.Name)) 
             throw new Exception("Projet deja existant ou donné erroner");
 
-            Project project = (projectCreate.ToEntity().ToDal());
+
+
+
+            Project project = (projectCreate.ToEntity().ToDal());   
             project.ProjectManager= _userRepository.GetById( projectCreate.ProjectManagerId);
+            
             _repo.Insert(project);
         }
 

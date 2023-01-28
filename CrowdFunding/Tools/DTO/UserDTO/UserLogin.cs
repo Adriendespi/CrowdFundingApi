@@ -8,9 +8,8 @@ namespace CrowdFundingBLL.Tools.DTO.UserDTO
 {
     public class UserLogin
     {
-        public string Pseudo { get; set; }
-        public string Email { get; set; }
-
+        public string Identifiant { get; set; }
+        
         public string Pwd { get; set; }
     }
     

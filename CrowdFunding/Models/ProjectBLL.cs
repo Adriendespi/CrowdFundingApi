@@ -27,6 +27,6 @@ namespace CrowdFundingBLL.Models
       
         public UserBLL ProjectManager { get; set; }
 
-        public  ICollection<UserProjectMTM> Donator { get; set; } = new List<UserProjectMTM>();
+        
     }
 }

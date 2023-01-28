@@ -27,6 +27,7 @@ namespace CrowdFundingBLL.Tools.Mappers
                 SumGoal = project.SumGoal,
                 img = project.img,
                 StartDate=DateTime.Now,
+                
               
                 
             };
@@ -40,8 +41,6 @@ namespace CrowdFundingBLL.Tools.Mappers
                 EndDate = project.EndDate,
                 SumGoal = project.SumGoal,
                 img = project.img,
-                ProjectManager = project.ProjectManager.ToDAL(),
-                Donator = project.Donator,
                 Sum = project.Sum,
                 StartDate = project.StartDate,
             };
@@ -56,7 +55,6 @@ namespace CrowdFundingBLL.Tools.Mappers
                 EndDate = project.EndDate,
                 SumGoal = project.SumGoal,
                 ProjectManager = project.ProjectManager.ToBLL(),
-                Donator = project.Donator,
                 Sum = project.Sum,
                 StartDate = project.StartDate,
                 img= project.img,
