@@ -1,6 +1,7 @@
 ﻿using CrowdFundingDAL.GestionEntity.context;
 using CrowdFundingDAL.Interfaces;
 using CrowdFundingDAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace CrowdFundingDAL.Repositories
             return (_Context.users.Any(m => m.Pseudo == pseudo || m.Mail == mail));
 
         }
+       
 
     }
 }

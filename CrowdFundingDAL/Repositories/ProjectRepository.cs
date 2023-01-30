@@ -30,5 +30,9 @@ namespace CrowdFundingDAL.Repositories
             _Context.SaveChanges();
             return (project);
         }
+        public ICollection<Project> GetProjectList(int id)
+        {
+             return _Context.projects.Where(u => u.ProjectManager.Id == id).ToList();
+        }
     }
 }

@@ -77,8 +77,8 @@ namespace CrowdFunding.Api.Controllers
         {
             try
             {
-                _userService.Delete(id);
-                return Ok();
+                
+                return Ok(_userService.Delete(id));
             }
             catch (Exception ex)
             {
@@ -91,8 +91,8 @@ namespace CrowdFunding.Api.Controllers
         {
             try
             {
-                _userService.Update(id,user);
-                return Ok();
+                
+                return Ok(_userService.Update(id, user));
             }
             catch (Exception ex)
             {
